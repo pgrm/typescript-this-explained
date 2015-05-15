@@ -1,0 +1,15 @@
+{
+  "name": "typescript-this-explained",
+  "version": "0.0.0",
+  "description": "How does this behave in different situations",
+  "main": "index.js",
+  "scripts": {
+    "prestart": "./node_modules/.bin/tsc index.ts",
+    "start": "node index.js"
+  },
+  "author": "Peter Grman <peter.grman@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "typescript": "^1.4.1"
+  }
+}
