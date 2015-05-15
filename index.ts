@@ -122,3 +122,75 @@ individualM2.bind(b)(); // prints 'b Class B' - is the same as b.individualM2()
 console.log();
 console.log("Last question, why does individualM1 print always undefined? what is the value of `this`?");
 console.log(this); // prints '{}' which equals to an empty object. That is the same `this` as inside individualM1 - that's why it always prints undefined
+
+console.log();
+console.log("Let's add a new class and see how it will behave now ...");
+console.log();
+
+class C {
+	classDesc = 'c Class C';
+	
+	runF1 = (f: () => void) => { 
+		f(); 
+	}
+	runF2(f: () => void) { 
+		f(); 
+	}
+	
+	runF1bound = (f: () => void) => { 
+		f.apply(this); // is the same as f.bind(this)() 
+	}
+	runF2bound(f: () => void) { 
+		f.apply(this); // is the same as f.bind(this)() 
+	}
+}
+
+var c = new C();
+
+c.runF1(a.ma1); // prints 'a Class A'
+c.runF1(a.ma2); // prints '`this` is `global` - for the same reason as fa2() and fb2()
+c.runF1(b.mb1); // prints 'b Class B'
+c.runF1(b.mb2); // prints '`this` is `global` - for the same reason as fa2() and fb2()
+c.runF2(a.ma1); // prints 'a Class A'
+c.runF2(a.ma2); // prints '`this` is `global` - for the same reason as fa2() and fb2()
+c.runF2(b.mb1); // prints 'b Class B'
+c.runF2(b.mb2); // prints '`this` is `global` - for the same reason as fa2() and fb2()
+
+console.log();
+console.log("And now the same thing with bindings ...");
+console.log();
+
+c.runF1(a.ma1.bind(a)); // prints 'a Class A'
+c.runF1(a.ma2.bind(a)); // prints 'a Class A'
+c.runF1(b.mb1.bind(b)); // prints 'b Class B'
+c.runF1(b.mb2.bind(b)); // prints 'b Class B'
+c.runF2(a.ma1.bind(a)); // prints 'a Class A'
+c.runF2(a.ma2.bind(a)); // prints 'a Class A'
+c.runF2(b.mb1.bind(b)); // prints 'b Class B'
+c.runF2(b.mb2.bind(b)); // prints 'b Class B'
+
+console.log();
+console.log("What about binding them explicitly ...");
+console.log();
+
+c.runF1bound(a.ma1); // prints 'a Class A' - because it is definde with the arrow notaions (=>)
+c.runF1bound(a.ma2); // prints 'c Class C' - the same as c.ma2()
+c.runF1bound(b.mb1); // prints 'b Class B' - because it is definde with the arrow notaions (=>)
+c.runF1bound(b.mb2); // prints 'c Class C' - the same as c.mb2()
+c.runF2bound(a.ma1); // prints 'a Class A' - because it is definde with the arrow notaions (=>)
+c.runF2bound(a.ma2); // prints 'c Class C' - the same as c.ma2()
+c.runF2bound(b.mb1); // prints 'b Class B' - because it is definde with the arrow notaions (=>)
+c.runF2bound(b.mb2); // prints 'c Class C' - the same as c.mb2()
+
+console.log();
+console.log("And now, binding an already bound function ...");
+console.log();
+
+c.runF1bound(a.ma1.bind(a)); // prints 'a Class A' - because it is defined with the arrow notaion (=>)
+c.runF1bound(a.ma2.bind(a)); // prints 'a Class A' - the first bind applies and can't be overwritten or changed
+c.runF1bound(b.mb1.bind(b)); // prints 'b Class B' - because it is defined with the arrow notaion (=>)
+c.runF1bound(b.mb2.bind(b)); // prints 'b Class B' - the first bind applies and can't be overwritten or changed
+c.runF2bound(a.ma1.bind(a)); // prints 'a Class A' - because it is defined with the arrow notaion (=>)
+c.runF2bound(a.ma2.bind(a)); // prints 'a Class A' - the first bind applies and can't be overwritten or changed
+c.runF2bound(b.mb1.bind(b)); // prints 'b Class B' - because it is defined with the arrow notaion (=>)
+c.runF2bound(b.mb2.bind(b)); // prints 'b Class B' - the first bind applies and can't be overwritten or changed

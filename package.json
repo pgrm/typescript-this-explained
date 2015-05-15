@@ -1,6 +1,6 @@
 {
   "name": "typescript-this-explained",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "How does this behave in different situations",
   "main": "index.js",
   "scripts": {
