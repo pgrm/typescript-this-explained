@@ -1,11 +1,16 @@
 {
   "name": "typescript-this-explained",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "How does this behave in different situations",
   "main": "index.js",
   "scripts": {
     "prestart": "./node_modules/.bin/tsc index.ts",
     "start": "node index.js"
+  },
+  "readme": "README.md",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/pgrm/typescript-this-explained.git"
   },
   "author": "Peter Grman <peter.grman@gmail.com>",
   "license": "MIT",
